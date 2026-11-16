@@ -8,11 +8,27 @@ from typing import Optional
 from pathlib import Path
 import html
 
+
+import os
+
 BASE_DIR = Path(__file__).resolve().parent
-engine = create_engine(
-    f"sqlite:///{BASE_DIR / 'docspace.db'}",
-    connect_args={"check_same_thread": False}
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    f"sqlite:///{BASE_DIR / 'docspace.db'}"
 )
+
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgres://", "postgresql://", 1
+    )
+
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"check_same_thread": False}
+    if DATABASE_URL.startswith("sqlite") else {}
+)
+
 SessionLocal = sessionmaker(bind=engine)
 Base = declarative_base()
 
