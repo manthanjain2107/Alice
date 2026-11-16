@@ -159,3 +159,29 @@ async def upload_document(user: str, file: UploadFile = File(...)):
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+
+
+@app.delete("/documents/{doc_id}")
+def delete_document(doc_id: int, user: str):
+    check_user(user)
+
+    with SessionLocal() as db:
+        doc = db.get(Document, doc_id)
+
+        if not doc:
+            raise HTTPException(404, "Document not found")
+
+        if doc.owner != user:
+            raise HTTPException(
+                403, "Only the owner can delete this document"
+            )
+
+        db.query(Share).filter(
+            Share.document_id == doc_id
+        ).delete(synchronize_session=False)
+
+        db.delete(doc)
+        db.commit()
+
+        return {"message": "Document deleted successfully"}
