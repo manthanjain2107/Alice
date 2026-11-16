@@ -1,0 +1,79 @@
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+}
+
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 280px;
+  background: #17243b;
+  color: white;
+  padding: 25px;
+}
+
+.sidebar button {
+  background: #4f7df3;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sidebar select {
+  padding: 10px;
+  width: 100%;
+}
+
+.sidebar h3 { margin-top: 30px; }
+
+.sidebar p {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.sidebar p:hover { background: #304462; }
+
+.editor { flex: 1; padding: 40px; }
+
+.editor input {
+  width: 100%;
+  font-size: 26px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.toolbar { margin: 20px 0; }
+
+.toolbar button {
+  margin-right: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.content {
+  background: white;
+  padding: 30px;
+  min-height: 350px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.editor > button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #4f7df3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
